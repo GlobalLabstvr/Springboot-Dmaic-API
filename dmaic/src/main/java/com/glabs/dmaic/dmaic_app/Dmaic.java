@@ -31,7 +31,7 @@ public class Dmaic implements Serializable
 	private Long dmaicId;
 	private String define;
 	
-	//private List<Measure> measure;
+	private Measure measure;
 	private String analyse;
 	private String implement;
 	private String control;
@@ -65,21 +65,22 @@ public class Dmaic implements Serializable
 	}
 
 	
-	/*@OneToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
-	public List<Measure> getMeasure() {
-		return measure;
-	}
-
-
-	public void setMeasure(List<Measure> measure) {
-		this.measure = measure;
-	}
-
-*/
+	/*@OneToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)*/
+	
 	public String getAnalyse() {
 		return analyse;
 	}
 	
+	public Measure getMeasure() {
+		return measure;
+	}
+
+
+	public void setMeasure(Measure measure) {
+		this.measure = measure;
+	}
+
+
 	public void setAnalyse(String analyse) {
 		this.analyse = analyse;
 	}

@@ -1,54 +1,58 @@
-package com.glabs.dmaic.dmaic;
+package com.glabs.dmaic.dmaic_app;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+//import com.glabs.dmaic.dmaic_app.Measure;
 import com.glabs.dmaic.user.User;
 
 
 @Entity
 @Table(name = "dmaic")
-public class Dmaic implements Serializable{
+public class Dmaic implements Serializable
+
+{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "DmaicID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	private String userId;
+	private Long dmaicId;
 	private String define;
-	private String measure;
-	private Integer current;
-	private Integer target;
+	
+	//private List<Measure> measure;
 	private String analyse;
 	private String implement;
 	private String control;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-    @JoinColumn(name = "UserID")
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+    @JoinColumn(name = "UserID")	
     private User user;
 	
-	public Dmaic() {
+	public Dmaic() 
+	{
 		
 	}
 	
-	public String getUserId() {
-		return userId;
+	
+	public Long getDmaicId() {
+		return dmaicId;
 	}
 
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setDmaicId(Long dmaicId) {
+		this.dmaicId = dmaicId;
 	}
 
 
@@ -60,35 +64,22 @@ public class Dmaic implements Serializable{
 		this.define = define;
 	}
 
-	public String getMeasure() {
+	
+	/*@OneToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+	public List<Measure> getMeasure() {
 		return measure;
 	}
 
-	public void setMeasure(String measure) {
+
+	public void setMeasure(List<Measure> measure) {
 		this.measure = measure;
 	}
 
-
-	public Integer getCurrent() {
-		return current;
-	}
-
-	public void setCurrent(Integer current) {
-		this.current = current;
-	}
-
-	public Integer getTarget() {
-		return target;
-	}
-
-	public void setTarget(Integer target) {
-		this.target = target;
-	}
-
+*/
 	public String getAnalyse() {
 		return analyse;
 	}
-
+	
 	public void setAnalyse(String analyse) {
 		this.analyse = analyse;
 	}
@@ -110,18 +101,16 @@ public class Dmaic implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Dmaic [userId=" + userId + ", define=" + define + ", measure=" + measure + ", current=" + current
-				+ ", target=" + target + ", analyse=" + analyse + ", implement=" + implement + ", control=" + control
-				+ "]";
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
 	
 
-	
-
-	
-	
 }

@@ -1,4 +1,4 @@
-package com.glabs.dmaic.dmaic;
+package com.glabs.dmaic.dmaic_app;
 
 import java.util.List;
 
@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.glabs.dmaic.dmaic.DmaicRepository;
+import com.glabs.dmaic.dmaic_app.DmaicRepository;
+import com.glabs.dmaic.user.UserRepository;
 
 @RestController
 
@@ -17,8 +18,12 @@ public class DmaicController {
 @Autowired
 private DmaicRepository repository;
 
+@Autowired
+private UserRepository userRepository;
 
-public DmaicRepository getRepository() {
+
+public DmaicRepository getRepository() 
+{
 	return repository;
 }
 public void setRepository(DmaicRepository repository) {

@@ -16,49 +16,49 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 @Autowired
-private UserRepository repository;
+private UserRepository userRepository;
 
 public UserRepository getRepository() {
-	return repository;
+	return userRepository;
 }
 
 public void setRepository(UserRepository repository) {
-	this.repository = repository;
+	this.userRepository = repository;
 }
 
 @GetMapping(value = "/users")
 public List<User> getAllUsers() {
-	return repository.findAll();
+	return userRepository.findAll();
 }
 
 @PostMapping("/users")
 User createOrSaveUser(@RequestBody User newUser) {
-	return repository.save(newUser);
+	return userRepository.save(newUser);
 }
 
 @GetMapping("/users/{id}")
 	User getUserById(@PathVariable Long id) {
-	return repository.findById(id).get();
+	return userRepository.findById(id).get();
 }
 
 @PutMapping("/users/{id}")
 User updateUser(@RequestBody User newUser, @PathVariable Long id) {
 	 
-    return repository.findById(id).map(user -> {
+    return userRepository.findById(id).map(user -> {
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
         user.setPhoneNumber(newUser.getPhoneNumber());
         user.setEmail(newUser.getEmail());
         user.setPassword(newUser.getPassword());
-        return repository.save(user);
+        return userRepository.save(user);
     }).orElseGet(() -> {
         newUser.setId(id);
-        return repository.save(newUser);
+        return userRepository.save(newUser);
     });
 }
 
 @DeleteMapping("/users/{id}")
 void deleteUser(@PathVariable Long id) {
-    repository.deleteById(id);
+	userRepository.deleteById(id);
 }
 }

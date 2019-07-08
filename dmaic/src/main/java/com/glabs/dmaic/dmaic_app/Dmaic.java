@@ -1,19 +1,20 @@
 package com.glabs.dmaic.dmaic_app;
 
 import java.io.Serializable;
-//import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 import com.glabs.dmaic.user.User;
@@ -27,11 +28,11 @@ public class Dmaic implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DmaicID")
 	private Long id;
 	private String define;
-	//private Measure measure;
+	private Measure measure;
 	private String analyse;
 	private String implement;
 	private String control;
@@ -82,16 +83,16 @@ public class Dmaic implements Serializable
 		this.analyse = analyse;
 	}
 
-	//@ManyToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
-	//@Column(name="dmaic")
-	//public Measure getMeasure() {
-		//return measure;
-	//}
+	
+	@Embedded
+	public Measure getMeasure() {
+		return measure;
+	}
 
 
-	//public void setMeasure(Measure measure) {
-		//this.measure = measure;
-	//}
+	public void setMeasure(Measure measure) {
+		this.measure = measure;
+	}
 
 
 	
@@ -112,13 +113,5 @@ public class Dmaic implements Serializable
 	}
 
 
-	@Override
-	public String toString() {
-		return "Dmaic [id=" + id + ", define=" + define + ",analyse=" + analyse
-				+ ", implement=" + implement + ", control=" + control + ", user=" + user + "]";
-	}
-
-
-	
 
 }

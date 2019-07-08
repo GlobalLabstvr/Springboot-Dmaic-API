@@ -1,21 +1,21 @@
 package com.glabs.dmaic.dmaic_app;
 
 import java.io.Serializable;
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-//import com.glabs.dmaic.dmaic_app.Measure;
 import com.glabs.dmaic.user.User;
 
 
@@ -27,32 +27,43 @@ public class Dmaic implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long dmaicId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "DmaicID")
+	private Long id;
 	private String define;
-	
-	private Measure measure;
+	//private Measure measure;
 	private String analyse;
 	private String implement;
 	private String control;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
     @JoinColumn(name = "UserID")	
-    private User user;
+   	private User user;
 	
 	public Dmaic() 
 	{
 		
 	}
 	
-	
-	public Long getDmaicId() {
-		return dmaicId;
+		
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setDmaicId(Long dmaicId) {
-		this.dmaicId = dmaicId;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 
@@ -64,27 +75,26 @@ public class Dmaic implements Serializable
 		this.define = define;
 	}
 
-	
-	/*@OneToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)*/
-	
 	public String getAnalyse() {
 		return analyse;
 	}
-	
-	public Measure getMeasure() {
-		return measure;
-	}
-
-
-	public void setMeasure(Measure measure) {
-		this.measure = measure;
-	}
-
-
 	public void setAnalyse(String analyse) {
 		this.analyse = analyse;
 	}
 
+	//@ManyToMany(targetEntity=Measure.class, mappedBy="dmaic", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+	//@Column(name="dmaic")
+	//public Measure getMeasure() {
+		//return measure;
+	//}
+
+
+	//public void setMeasure(Measure measure) {
+		//this.measure = measure;
+	//}
+
+
+	
 	public String getImplement() {
 		return implement;
 	}
@@ -102,13 +112,10 @@ public class Dmaic implements Serializable
 	}
 
 
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
+	@Override
+	public String toString() {
+		return "Dmaic [id=" + id + ", define=" + define + ",analyse=" + analyse
+				+ ", implement=" + implement + ", control=" + control + ", user=" + user + "]";
 	}
 
 

@@ -16,28 +16,28 @@ import com.glabs.dmaic.user.UserRepository;
 public class DmaicController {
 	
 @Autowired
-private DmaicRepository repository;
+private DmaicRepository dmaicRepository;
 
 @Autowired
-private UserRepository userRepository;
+//private UserRepository userRepository;
 
 
 public DmaicRepository getRepository() 
 {
-	return repository;
+	return dmaicRepository;
 }
 public void setRepository(DmaicRepository repository) {
-	this.repository = repository;
+	this.dmaicRepository = repository;
 }
 
 @GetMapping(value = "/dmaic")
 public List<Dmaic> getAllDmaic() {
-	return repository.findAll();
+	return dmaicRepository.findAll();
 }
 
 @PostMapping("/dmaic")
 Dmaic createOrSaveDmaic(@RequestBody Dmaic newDmaic) {
-	return repository.save(newDmaic);
+	return dmaicRepository.save(newDmaic);
 }
 
 //@GetMapping("/dmaic/{id}")

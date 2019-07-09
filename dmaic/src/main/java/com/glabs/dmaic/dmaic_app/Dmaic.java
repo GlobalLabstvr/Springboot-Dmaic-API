@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,9 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import com.glabs.dmaic.user.User;
 
 
@@ -28,6 +32,7 @@ public class Dmaic implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GenericGenerator(name = "native", strategy = "native")
 	@Column(name = "DmaicID")
 	private Long id;
 	
@@ -38,7 +43,8 @@ public class Dmaic implements Serializable
 	private String control;
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
-    @JoinColumn(name = "UserID")	
+    @JoinColumn(name = "UserID")
+	
 	private User user;
 	
 	public Dmaic() 

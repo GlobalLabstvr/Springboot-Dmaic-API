@@ -1,12 +1,23 @@
 package com.glabs.dmaic.user;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.glabs.dmaic.dmaic_app.Dmaic;
 
 
 @Entity
@@ -17,6 +28,7 @@ public class User  implements Serializable{
 	@Id
 	@Column(name = "UserID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	private String firstName;
@@ -25,7 +37,8 @@ public class User  implements Serializable{
 	private String email;
 	private String password;
 	
-	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	Set<Dmaic> dmaic = new HashSet<Dmaic>();
 	public User() 
 	{
 		
@@ -69,10 +82,20 @@ public class User  implements Serializable{
 		this.password = password;
 	}
 	
+	
+	public Set<Dmaic> getDmaic() {
+		return dmaic;
+	}
+
+	public void setDmaic(Set<Dmaic> dmaic) {
+		this.dmaic = dmaic;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", password=" + password + "]";
-	}	
+				+ ", email=" + email + ", password=" + password + ", dmaic=" + dmaic + "]";
+	}
 
+	
 }

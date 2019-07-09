@@ -1,18 +1,13 @@
 package com.glabs.dmaic.user;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
-//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//import com.glabs.dmaic.dmaic_app.Dmaic;
 
 @Entity
 @Table(name = "users")
@@ -23,14 +18,13 @@ public class User  implements Serializable{
 	@Column(name = "UserID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String firstName;
 	private String lastName;
 	private Long phoneNumber;
 	private String email;
 	private String password;
 	
-	//@OneToOne(mappedBy="user")
-	//private Dmaic dmaic;
 	
 	public User() 
 	{
@@ -43,6 +37,7 @@ public class User  implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

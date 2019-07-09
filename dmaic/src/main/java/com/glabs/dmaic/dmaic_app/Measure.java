@@ -33,11 +33,4 @@ public class Measure {
 	public void setTarget(Long target) {
 		this.target = target;
 	}
-
-
-	
-
-
-	
-		
 }

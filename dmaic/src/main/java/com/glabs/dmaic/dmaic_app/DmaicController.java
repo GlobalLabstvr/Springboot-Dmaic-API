@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.glabs.dmaic.dmaic_app.DmaicRepository;
-import com.glabs.dmaic.user.UserRepository;
 
 @RestController
 
@@ -39,7 +38,5 @@ public List<Dmaic> getAllDmaic() {
 Dmaic createOrSaveDmaic(@RequestBody Dmaic newDmaic) {
 	return dmaicRepository.save(newDmaic);
 }
-
-//@GetMapping("/dmaic/{id}")
-	//Dmaic getDmaicById(@PathVariable Lo)
+ 
 }

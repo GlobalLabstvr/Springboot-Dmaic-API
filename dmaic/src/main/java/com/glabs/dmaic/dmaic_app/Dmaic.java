@@ -14,23 +14,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
-
 import com.glabs.dmaic.user.User;
 
 
 @Entity
 @Table(name = "dmaic")
+
 public class Dmaic implements Serializable
 
 {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "DmaicID")
 	private Long id;
+	
 	private String define;
 	private Measure measure;
 	private String analyse;
@@ -39,24 +39,20 @@ public class Dmaic implements Serializable
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
     @JoinColumn(name = "UserID")	
-   	private User user;
+	private User user;
 	
 	public Dmaic() 
 	{
 		
 	}
 	
-		
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	
+	}	
 	
 	public Long getId() {
 		return id;
@@ -111,7 +107,6 @@ public class Dmaic implements Serializable
 	public void setControl(String control) {
 		this.control = control;
 	}
-
 
 
 }

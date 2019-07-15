@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.glabs.dmaic.user.User;
 
 
@@ -31,7 +32,11 @@ public class Dmaic implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+
+	
+
 	@GenericGenerator(name = "native", strategy = "native")
 	@Column(name = "DmaicID")
 	private Long id;
@@ -45,6 +50,7 @@ public class Dmaic implements Serializable
 	@ManyToOne(fetch = FetchType.EAGER,cascade= CascadeType.ALL)
     @JoinColumn(name = "UserID")
 	
+	@JsonBackReference
 	private User user;
 	
 	public Dmaic() 
@@ -116,4 +122,3 @@ public class Dmaic implements Serializable
 
 
 }
-

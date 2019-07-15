@@ -2,7 +2,10 @@ package com.glabs.dmaic.dmaic_app;
 
 import java.util.List;
 
+
 import javax.validation.Valid;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.glabs.dmaic.dmaic_app.DmaicRepository;
+
 import com.glabs.dmaic.exception.ResourceNotFoundException;
 
 import com.glabs.dmaic.user.UserRepository;
+
+
 
 
 
@@ -28,13 +34,27 @@ public class DmaicController {
 private DmaicRepository dmaicRepository;
 
 @Autowired
+
 private UserRepository userRepository;
 
 
-@GetMapping(value = "/dmaic")
+//private UserRepository userRepository;
+
+
+public DmaicRepository getRepository() 
+{
+	return dmaicRepository;
+}
+public void setRepository(DmaicRepository repository) {
+	this.dmaicRepository = repository;
+}
+
+
+@GetMapping("/dmaic")
 public List<Dmaic> getAllDmaic() {
 	return dmaicRepository.findAll();
 }
+
 
 //@PostMapping("/dmaic")
 //Dmaic createOrSaveDmaic(@RequestBody Dmaic newDmaic) {
@@ -52,6 +72,13 @@ public Dmaic createDmaic(
 		return dmaicRepository.save(dmaic);
 	}).orElseThrow(() -> new ResourceNotFoundException("userId " + userId + " not found"));
 }
+
+
+@PostMapping("/dmaic")
+Dmaic createOrSaveDmaic(@RequestBody Dmaic newDmaic) {
+	return dmaicRepository.save(newDmaic);
+}
+ 
 
 @PutMapping("/dmaic/{id}")
 Dmaic updateDmaic(@RequestBody Dmaic newDmaic, @PathVariable Long id) {

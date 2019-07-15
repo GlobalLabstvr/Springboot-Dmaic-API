@@ -18,15 +18,8 @@ public class UserController {
 @Autowired
 private UserRepository userRepository;
 
-public UserRepository getRepository() {
-	return userRepository;
-}
 
-public void setRepository(UserRepository repository) {
-	this.userRepository = repository;
-}
-
-@GetMapping(value = "/users")
+@GetMapping("/users")
 public List<User> getAllUsers() {
 	return userRepository.findAll();
 }

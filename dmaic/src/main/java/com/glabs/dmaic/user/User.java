@@ -3,9 +3,17 @@ package com.glabs.dmaic.user;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.glabs.dmaic.dmaic_app.Dmaic;
 
 
@@ -24,7 +34,11 @@ public class User  implements Serializable{
 	
 	@Id
 	@Column(name = "UserID")
+
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+
+
+
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
@@ -35,6 +49,7 @@ public class User  implements Serializable{
 	private String password;
 	
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	Set<Dmaic> dmaic = new HashSet<Dmaic>();
 	public User() 
 	{
@@ -96,5 +111,3 @@ public class User  implements Serializable{
 
 	
 }
-
-
